@@ -31,26 +31,6 @@ var DataKategori = []Kategori{
 	{"buang sampah sembarangan", false, 5},
 }
 
-// Fungsi hitung skor otomatis
-func hitungSkorOtomatis(kategori string) int {
-	if kategori == "hemat energi" {
-		return 80
-	} else if kategori == "hemat air" {
-		return 70
-	} else if kategori == "mengurangi sampah" {
-		return 95
-	} else if kategori == "transportasi ramah lingkungan" {
-		return 75
-	} else if kategori == "pola makan" {
-		return 85
-	} else if kategori == "boros energi" {
-		return 20
-	} else if kategori == "buang sampah sembarangan" {
-		return 5
-	}
-	return 50 // default
-}
-
 // Fungsi tambah aktivitas
 func tambah_aktivitas() {
 	var nama string
@@ -155,7 +135,7 @@ func hapus_aktivitas() {
 	fmt.Println("Aktivitas tidak ditemukan.")
 }
 
-// Fungsi cari aktivitas
+// Fungsi cari aktivitas dengan data terurut
 func SequentialSearch() {
 	var Nama string
 	fmt.Print("Masukkan Nama Aktivitas yang ingin dicari: ")
@@ -171,19 +151,7 @@ func SequentialSearch() {
 	fmt.Println("Aktivitas tidak ditemukan.")
 }
 
-//mengurutkan data nama aktivitas dari terurut
-func sort_aktivitas_by_nama() {
-	for i := 1; i < len(Daftar_Aktivitas); i++ {
-		key := Daftar_Aktivitas[i]
-		j := i - 1
-		for j >= 0 && Daftar_Aktivitas[j].Nama > key.Nama {
-			Daftar_Aktivitas[j+1] = Daftar_Aktivitas[j]
-			j--
-		}
-		Daftar_Aktivitas[j+1] = key
-	}
-}
-
+// Fungsi cari aktivitas dengan data tidak terurut
 func BinarySearch() {
 	var nama string
 	fmt.Print("Masukkan Nama Aktivitas yang ingin dicari (Binary Search): ")
@@ -211,47 +179,52 @@ func BinarySearch() {
 	fmt.Println("Aktivitas tidak ditemukan.")
 }
 
-// Fungsi menampilkan kategori
-func tampilkanKategori() {
-	fmt.Println("Pilih kategori aktivitas:")
-	for i := 0; i < len(DataKategori); i++ {
-		fmt.Printf("%d. %s\n", i+1, DataKategori[i].Nama)
-	}
-}
-
-// Fungsi hitung total skor
-func hitung_total_skor() {
-	total := 0
-	for i := 0; i < len(Daftar_Aktivitas); i++ {
-		total += Daftar_Aktivitas[i].Skor
-	}
-	fmt.Printf("Total skor dari semua aktivitas: %d\n\n", total)
-}
-
-func SelectionSort() {
+// Fungsi Selection Sort berdasarkan skor
+func selectionSort() {
 	var opsi string
-	n := len(Daftar_Aktivitas)
-	fmt.Print("Urutkan Skor secara Descending? Yes or No: ")
+
+	fmt.Print("Urutkan skor secara descending? (yes or no): ")
 	fmt.Scanln(&opsi)
-	desc := opsi == "Yes"
+	desc := (opsi == "yes" || opsi == "Yes")
+	n := len(Daftar_Aktivitas)
 	for i := 0; i < n-1; i++ {
 		idx := i
 		for j := i + 1; j < n; j++ {
-			if desc { //descending (mengurutkan dari yang terbesar), ascending(mengurutkan dari yang terkecil)
+			if desc {
 				if Daftar_Aktivitas[j].Skor > Daftar_Aktivitas[idx].Skor {
 					idx = j
-				} else {
-					if Daftar_Aktivitas[j].Skor < Daftar_Aktivitas[idx].Skor {
-						idx = j
-					}
+				}
+			} else {
+				if Daftar_Aktivitas[j].Skor < Daftar_Aktivitas[idx].Skor {
+					idx = j
 				}
 			}
 		}
-
+		if idx != i {
+			Daftar_Aktivitas[i], Daftar_Aktivitas[idx] = Daftar_Aktivitas[idx], Daftar_Aktivitas[i]
+		}
 	}
-	fmt.Println("Aktivitas Berhasil diurutkan")
+	fmt.Println("Aktivitas berhasil diurutkan berdasarkan skor.")
 }
 
+// Fungsi insertion sort berdasarkan nama
+func insertionSort() {
+	n := len(Daftar_Aktivitas)
+	for i := 1; i < n; i++ {
+		key := Daftar_Aktivitas[i]
+		j := i - 1
+
+		for j >= 0 && Daftar_Aktivitas[j].Nama > key.Nama {
+			Daftar_Aktivitas[j+1] = Daftar_Aktivitas[j]
+			j--
+		}
+		Daftar_Aktivitas[j+1] = key
+	}
+
+	fmt.Println("Aktivitas berhasil diurutkan berdasarkan nama (A-Z).")
+}
+
+// Fungsi untuk menampilkan laporan bulanan
 func laporan_bulanan() {
 	totalSkor := 0
 	jumlahPositif := 0
@@ -310,9 +283,11 @@ func main() {
 		fmt.Println("4. Hapus aktivitas")
 		fmt.Println("5. Cari aktivitas (SequentialSearch)")
 		fmt.Println("6. Cari aktivitas (BinarySearch)")
-		fmt.Println("7. Hitung total skor")
-		fmt.Println("8. Laporan Bulanan")
-		fmt.Println("0. Keluar aplikasi")
+		fmt.Println("7. Urutkan Aktivitas berdasarkan Skor (Selection Sort)")
+		fmt.Println("8. Urutkan Aktivitas berdasarkan Nama (Insertion Sort)")
+		fmt.Println("9. Hitung total skor")
+		fmt.Println("10. Cetak laporan bulanan")
+		fmt.Println("11. Keluar aplikasi")
 		fmt.Print("Pilih menu: ")
 		fmt.Scanln(&pilihan)
 
@@ -330,14 +305,68 @@ func main() {
 		case 6:
 			BinarySearch()
 		case 7:
-			hitung_total_skor()
+			selectionSort()
 		case 8:
+			insertionSort()
+		case 9:
+			hitung_total_skor()
+		case 10:
 			laporan_bulanan()
-		case 0:
+		case 11:
 			fmt.Println("Terima kasih telah menggunakan aplikasi ini.")
 			return
 		default:
 			fmt.Println("Pilihan tidak valid, silakan coba lagi.")
 		}
 	}
+}
+
+// Fungsi untuk mengurutkan data nama aktivitas dari terurut
+func sort_aktivitas_by_nama() {
+	for i := 1; i < len(Daftar_Aktivitas); i++ {
+		key := Daftar_Aktivitas[i]
+		j := i - 1
+		for j >= 0 && Daftar_Aktivitas[j].Nama > key.Nama {
+			Daftar_Aktivitas[j+1] = Daftar_Aktivitas[j]
+			j--
+		}
+		Daftar_Aktivitas[j+1] = key
+	}
+}
+
+// Fungsi menampilkan kategori
+func tampilkanKategori() {
+	fmt.Println("Pilih kategori aktivitas:")
+	for i := 0; i < len(DataKategori); i++ {
+		fmt.Printf("%d. %s\n", i+1, DataKategori[i].Nama)
+	}
+}
+
+// Fungsi hitung total skor
+func hitung_total_skor() {
+	total := 0
+	for i := 0; i < len(Daftar_Aktivitas); i++ {
+		total += Daftar_Aktivitas[i].Skor
+	}
+	fmt.Printf("Total skor dari semua aktivitas: %d\n\n", total)
+}
+
+// Fungsi hitung skor otomatis
+func hitungSkorOtomatis(kategori string) int {
+	if kategori == "hemat energi" {
+		return 80
+	} else if kategori == "hemat air" {
+		return 70
+	} else if kategori == "mengurangi sampah" {
+		return 95
+	} else if kategori == "transportasi ramah lingkungan" {
+		return 75
+	} else if kategori == "pola makan" {
+		return 99
+	} else if kategori == "boros energi" {
+		return 20
+	} else if kategori == "buang sampah sembarangan" {
+		return 5
+	}
+	return 50
 }

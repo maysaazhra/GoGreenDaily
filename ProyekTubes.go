@@ -365,7 +365,7 @@ func hitungSkorOtomatis(kategori string) int {
 		return 99
 	} else if kategori == "boros energi" {
 		return 20
-	} else if kategori == "buang sampah sembarangan" {
+	} else if kategori == "pencemaran lingkungan" {
 		return 5
 	}
 	return 50

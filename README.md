@@ -1,10 +1,17 @@
+KELOMPOK 2 :
+1. Elok Elysia Dewi (103132400013)
+2. Keyla Azzahra (103132400017)
+3. Isna Farhah Umami (103132430004)
+4. Maysa Azhra Fauziyyah (103132430005)
+
+
 # 🌿 Aplikasi Pelacak Gaya Hidup Ramah Lingkungan
 
 Aplikasi ini berbasis Go untuk mencatat dan mengelola aktivitas harian pengguna yang berdampak terhadap lingkungan, baik positif maupun negatif. Aplikasi ini membantu pengguna mengevaluasi gaya hidup mereka berdasarkan skor ramah lingkungan.
 
 ---
 
-## 🧩 Fitur Aplikasi
+## Fitur Aplikasi
 
 - ✅ Tambah aktivitas baru berdasarkan kategori
 - 📄 Tampilkan daftar semua aktivitas

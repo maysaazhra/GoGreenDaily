@@ -28,7 +28,7 @@ var DataKategori = []Kategori{
 	{"transportasi ramah lingkungan", true, 75},
 	{"pola makan", true, 85},
 	{"boros energi", false, 20},
-	{"buang sampah sembarangan", false, 5},
+	{"pencemaran lingkungan", false, 5},
 }
 
 // Fungsi tambah aktivitas

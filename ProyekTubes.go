@@ -26,9 +26,9 @@ var DataKategori = []Kategori{
 	{"hemat air", true, 70},
 	{"mengurangi sampah", true, 95},
 	{"transportasi ramah lingkungan", true, 75},
-	{"pola makan", true, 85},
+	{"tanam pohon", true, 99},
 	{"boros energi", false, 20},
-	{"pencemaran lingkungan", false, 5},
+	{"Pencemaran lingkungan", false, 5},
 }
 
 // Fungsi tambah aktivitas
@@ -208,7 +208,7 @@ func selectionSort() {
 }
 
 // Fungsi insertion sort berdasarkan nama
-func InsertionSort() {
+func insertionSort() {
 	n := len(Daftar_Aktivitas)
 	for i := 1; i < n; i++ {
 		key := Daftar_Aktivitas[i]
@@ -272,8 +272,8 @@ func laporan_bulanan() {
 	fmt.Println()
 }
 
-func main() { //menampilkan menu utama dalam bentuk looping dan memanggil fungsi-fungsi sesuai menu
-	var pilihan int //untuk menyimpan input user (menu yang dipilih).
+func main() {
+	var pilihan int
 
 	for {
 		fmt.Println("=== Aplikasi Pelacak Gaya Hidup Ramah Lingkungan ===")
@@ -284,14 +284,14 @@ func main() { //menampilkan menu utama dalam bentuk looping dan memanggil fungsi
 		fmt.Println("5. Cari aktivitas (SequentialSearch)")
 		fmt.Println("6. Cari aktivitas (BinarySearch)")
 		fmt.Println("7. Urutkan Aktivitas berdasarkan Skor (Selection Sort)")
-		fmt.Println("8. Urutkan Aktivitas berdasarkan Nama (Insertion Sort)")
+		fmt.Println("8. Urutkan Kategori berdasarkan Frekuensi (Insertion Sort)")
 		fmt.Println("9. Hitung total skor")
 		fmt.Println("10. Cetak laporan bulanan")
 		fmt.Println("11. Keluar aplikasi")
 		fmt.Print("Pilih menu: ")
 		fmt.Scanln(&pilihan)
 
-		switch pilihan { //digunakan untuk mengevaluasi nilai dari variable pilihan (biasanya input dari pengguna)
+		switch pilihan {
 		case 1:
 			tambah_aktivitas()
 		case 2:
@@ -361,11 +361,11 @@ func hitungSkorOtomatis(kategori string) int {
 		return 95
 	} else if kategori == "transportasi ramah lingkungan" {
 		return 75
-	} else if kategori == "pola makan" {
+	} else if kategori == "tanam pohon" {
 		return 99
 	} else if kategori == "boros energi" {
 		return 20
-	} else if kategori == "pencemaran lingkungan" {
+	} else if kategori == "Pencemaran lingkungan" {
 		return 5
 	}
 	return 50

@@ -208,7 +208,7 @@ func selectionSort() {
 }
 
 // Fungsi insertion sort berdasarkan nama
-func insertionSort() {
+func InsertionSort() {
 	n := len(Daftar_Aktivitas)
 	for i := 1; i < n; i++ {
 		key := Daftar_Aktivitas[i]
@@ -272,8 +272,8 @@ func laporan_bulanan() {
 	fmt.Println()
 }
 
-func main() {
-	var pilihan int
+func main() { //menampilkan menu utama dalam bentuk looping dan memanggil fungsi-fungsi sesuai menu
+	var pilihan int //untuk menyimpan input user (menu yang dipilih).
 
 	for {
 		fmt.Println("=== Aplikasi Pelacak Gaya Hidup Ramah Lingkungan ===")
@@ -291,7 +291,7 @@ func main() {
 		fmt.Print("Pilih menu: ")
 		fmt.Scanln(&pilihan)
 
-		switch pilihan {
+		switch pilihan { //digunakan untuk mengevaluasi nilai dari variable pilihan (biasanya input dari pengguna)
 		case 1:
 			tambah_aktivitas()
 		case 2:
